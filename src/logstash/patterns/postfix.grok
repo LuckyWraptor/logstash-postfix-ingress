@@ -96,15 +96,21 @@ POSTFIX_ANVIL_CONN_CACHE statistics: max cache size %{NUMBER:[postfix][anvil][ca
 POSTFIX_ANVIL_CONN_COUNT statistics: max connection count %{NUMBER:[postfix][anvil][conn_count]} for \(%{DATA:[postfix][service]}:%{IP:[postfix][client][ip]}\) at %{SYSLOGTIMESTAMP:[postfix][anvil][timestamp]}
 
 # smtp patterns
-POSTFIX_SMTP_DELIVERY %{POSTFIX_KEYVALUE} status=%{STATUS_WORD:[postfix][status][code_enhanced]}( \(%{GREEDYDATA:[postfix][smtp][response]}\))?
+POSTFIX_SMTP_DELIVERY %{POSTFIX_KEYVALUE} status=%{STATUS_WORD:[postfix][status][code_enhanced]}( \(%{POSTFIX_SASL_SSLAUTHFAIL}\)| \(%{POSTFIX_SASL_SSLAUTHERR}\)| \(%{GREEDYDATA:[postfix][smtp][response]}\))?
 POSTFIX_SMTP_CONNERR connect to %{POSTFIX_RELAY_INFO}: %{POSTFIX_LOSTCONN:[postfix][smtp][lostconn][data]}
 POSTFIX_SMTP_SSLCONNERR SSL_connect error to %{POSTFIX_RELAY_INFO}: %{POSTFIX_LOSTCONN:[postfix][smtp][lostconn][data]}
 POSTFIX_SMTP_LOSTCONN %{POSTFIX_QUEUEID:[postfix][queueid]}: %{POSTFIX_LOSTCONN:[postfix][smtp][lostconn][data]} with %{POSTFIX_RELAY_INFO}( while %{POSTFIX_LOSTCONN_REASONS:[postfix][smtp][lostconn][reason]})?
 POSTFIX_SMTP_TIMEOUT %{POSTFIX_QUEUEID:[postfix][queueid]}: conversation with %{POSTFIX_RELAY_INFO} timed out( while %{POSTFIX_LOSTCONN_REASONS:[postfix][smtp][lostconn][reason]})?
 POSTFIX_SMTP_RELAYERR %{POSTFIX_QUEUEID:[postfix][queueid]}: host %{POSTFIX_RELAY_INFO} said: %{GREEDYDATA:[postfix][smtp][response]} \(in reply to %{POSTFIX_SMTP_STAGE:[postfix][smtp][stage]} command\)
-POSTFIX_SMTP_SSLAUTHERR %{POSTFIX_QUEUEID:[postfix][queueid]}: SASL authentication failed; server %{POSTFIX_RELAY_INFO} said: %{GREEDYDATA:[postfix][smtp][response]}
+POSTFIX_SMTP_SSLAUTHERR %{POSTFIX_QUEUEID:[postfix][queueid]}: %{POSTFIX_SASL_SSLAUTHERR}
+POSTFIX_SMTP_SSLAUTHFAIL %{POSTFIX_QUEUEID:[postfix][queueid]}: %{POSTFIX_SASL_SSLAUTHFAIL}
 POSTFIX_SMTP_UTF8 host %{POSTFIX_RELAY_INFO} offers SMTPUTF8 support, but not 8BITMIME
 POSTFIX_SMTP_PIX %{POSTFIX_QUEUEID:[postfix][queueid]}: enabling PIX workarounds: %{DATA:[postfix][pix][workaround]} for %{POSTFIX_RELAY_INFO}
+
+
+# SASL patterns
+POSTFIX_SASL_SSLAUTHERR SASL authentication %{SASL_XOAUTH2_TYPE:[postfix][sasl][result]}; server %{POSTFIX_RELAY_INFO} said: %{GREEDYDATA:[postfix][smtp][response]}
+POSTFIX_SASL_SSLAUTHFAIL SASL authentication %{SASL_XOAUTH2_TYPE:[postfix][sasl][result]}; cannot authenticate to server %{POSTFIX_RELAY_INFO}: %{GREEDYDATA:[postfix][smtp][response]}
 
 # master patterns
 POSTFIX_MASTER_START (daemon started|reload) -- version %{DATA:[postfix][version]}, configuration %{PATH:[postfix][config_path]}
@@ -126,7 +132,7 @@ POSTFIX_PIPE %{POSTFIX_PIPE_ANY}
 POSTFIX_POSTSCREEN %{POSTFIX_PS_CONNECT}|%{POSTFIX_PS_ACCESS}|%{POSTFIX_PS_NOQUEUE}|%{POSTFIX_PS_TOOBUSY}|%{POSTFIX_PS_CACHE}|%{POSTFIX_PS_DNSBL}|%{POSTFIX_PS_VIOLATIONS}|%{POSTFIX_WARNING}
 POSTFIX_DNSBLOG %{POSTFIX_DNSBLOG_LISTING}|%{POSTFIX_WARNING}
 POSTFIX_ANVIL %{POSTFIX_ANVIL_CONN_RATE}|%{POSTFIX_ANVIL_CONN_CACHE}|%{POSTFIX_ANVIL_CONN_COUNT}
-POSTFIX_SMTP %{POSTFIX_SMTP_DELIVERY}|%{POSTFIX_SMTP_CONNERR}|%{POSTFIX_SMTP_SSLCONNERR}|%{POSTFIX_SMTP_SSLAUTHERR}|%{POSTFIX_SMTP_LOSTCONN}|%{POSTFIX_SMTP_TIMEOUT}|%{POSTFIX_SMTP_RELAYERR}|%{POSTFIX_TLSCONN}|%{POSTFIX_WARNING}|%{POSTFIX_SMTP_UTF8}|%{POSTFIX_TLSVERIFICATION}|%{POSTFIX_SMTP_PIX}
+POSTFIX_SMTP %{POSTFIX_SMTP_DELIVERY}|%{POSTFIX_SMTP_CONNERR}|%{POSTFIX_SMTP_SSLCONNERR}|%{POSTFIX_SMTP_SSLAUTHERR}|%{POSTFIX_SMTP_SSLAUTHFAIL}|%{POSTFIX_SMTP_LOSTCONN}|%{POSTFIX_SMTP_TIMEOUT}|%{POSTFIX_SMTP_RELAYERR}|%{POSTFIX_TLSCONN}|%{POSTFIX_WARNING}|%{POSTFIX_SMTP_UTF8}|%{POSTFIX_TLSVERIFICATION}|%{POSTFIX_SMTP_PIX}
 POSTFIX_DISCARD %{POSTFIX_DISCARD_ANY}|%{POSTFIX_WARNING}
 POSTFIX_LMTP %{POSTFIX_SMTP}
 POSTFIX_PICKUP %{POSTFIX_KEYVALUE}
