@@ -1,0 +1,8 @@
+# Version: 1.0.0
+# Author: LuckyWraptor
+#
+# Custom grok pattern for xoauth2 messages
+#
+
+SASL_XOAUTH2_TYPE (failed|success)
+SASL_XOAUTH2_AUTH_FAILURE auth %{SASL_XOAUTH2_TYPE:[postfix][sasl][result]}: %{SYSLOGTIMESTAMP}: %{GREEDYDATA:message}
