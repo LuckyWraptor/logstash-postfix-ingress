@@ -1,0 +1,3 @@
+- pipeline.id: postfix-ingress
+  path.config: "/usr/share/logstash/pipelines/postfix-ingress"
+  pipeline.workers: 1 # Important to ensure all logs are read sequentually
