@@ -1,0 +1,562 @@
+{
+  "_routing": {
+    "required": false
+  },
+  "numeric_detection": false,
+  "dynamic_date_formats": [
+    "strict_date_optional_time",
+    "yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z"
+  ],
+  "_source": {
+    "excludes": [],
+    "includes": [],
+    "enabled": true
+  },
+  "dynamic": true,
+  "dynamic_templates": [],
+  "date_detection": true,
+  "properties": {
+    "postfix": {
+      "type": "object",
+      "properties": {
+        "server": {
+          "type": "object",
+          "properties": {
+            "port": {
+              "type": "integer"
+            },
+            "ip": {
+              "type": "ip"
+            }
+          }
+        },
+        "bounce": {
+          "type": "object",
+          "properties": {
+            "queueid": {
+              "type": "keyword"
+            }
+          }
+        },
+        "anvil": {
+          "type": "object",
+          "properties": {
+            "conn_period": {
+              "type": "keyword"
+            },
+            "cache": {
+              "type": "integer"
+            },
+            "conn_rate": {
+              "type": "short"
+            },
+            "conn_count": {
+              "coerce": true,
+              "index": true,
+              "ignore_malformed": false,
+              "store": false,
+              "type": "short",
+              "doc_values": true
+            },
+            "timestamp": {
+              "type": "date"
+            }
+          }
+        },
+        "dnsbl": {
+          "type": "object",
+          "properties": {
+            "result": {
+              "type": "ip"
+            },
+            "domain": {
+              "type": "keyword"
+            }
+          }
+        },
+        "prepend": {
+          "type": "object",
+          "properties": {
+            "trigger": {
+              "type": "text"
+            },
+            "type": {
+              "type": "keyword"
+            },
+            "value": {
+              "type": "text"
+            }
+          }
+        },
+        "messageid": {
+          "type": "keyword"
+        },
+        "smtpd": {
+          "type": "object",
+          "properties": {
+            "lostconn": {
+              "type": "object",
+              "properties": {
+                "reason": {
+                  "type": "text"
+                },
+                "data": {
+                  "type": "text"
+                }
+              }
+            }
+          }
+        },
+        "config_path": {
+          "type": "keyword"
+        },
+        "error": {
+          "type": "object",
+          "properties": {
+            "response": {
+              "type": "text"
+            }
+          }
+        },
+        "pipelining": {
+          "type": "object",
+          "properties": {
+            "response": {
+              "type": "text"
+            },
+            "improper_data": {
+              "type": "text"
+            }
+          }
+        },
+        "sasl": {
+          "type": "object",
+          "properties": {
+            "result": {
+              "type": "keyword"
+            },
+            "method": {
+              "type": "keyword"
+            },
+            "username": {
+              "type": "keyword"
+            }
+          }
+        },
+        "action": {
+          "type": "keyword"
+        },
+        "client": {
+          "type": "object",
+          "properties": {
+            "hostname": {
+              "type": "keyword"
+            },
+            "port": {
+              "type": "integer"
+            },
+            "ip": {
+              "type": "ip"
+            }
+          }
+        },
+        "from": {
+          "type": "keyword"
+        },
+        "pix": {
+          "type": "object",
+          "properties": {
+            "workaround": {
+              "type": "text"
+            }
+          }
+        },
+        "nrcpt": {
+          "type": "integer"
+        },
+        "postscreen": {
+          "type": "object",
+          "properties": {
+            "cache": {
+              "type": "object",
+              "properties": {
+                "retained": {
+                  "type": "integer"
+                },
+                "dropped": {
+                  "type": "integer"
+                }
+              }
+            },
+            "access": {
+              "type": "keyword"
+            },
+            "data": {
+              "type": "text"
+            },
+            "dnsbl_rank": {
+              "type": "integer"
+            },
+            "violation": {
+              "type": "object",
+              "properties": {
+                "time": {
+                  "type": "integer"
+                },
+                "status": {
+                  "type": "keyword"
+                }
+              }
+            },
+            "toobusy": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "text"
+                }
+              }
+            }
+          }
+        },
+        "queueid": {
+          "type": "keyword"
+        },
+        "smtp": {
+          "type": "object",
+          "properties": {
+            "lostconn": {
+              "type": "object",
+              "properties": {
+                "reason": {
+                  "type": "text"
+                },
+                "data": {
+                  "type": "text"
+                }
+              }
+            },
+            "stage": {
+              "type": "keyword"
+            },
+            "response": {
+              "type": "text"
+            }
+          }
+        },
+        "termination_signal": {
+          "type": "integer"
+        },
+        "postsuper": {
+          "type": "object",
+          "properties": {
+            "summary": {
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "action": {
+                  "type": "keyword"
+                }
+              }
+            },
+            "action": {
+              "type": "keyword"
+            }
+          }
+        },
+        "relay": {
+          "type": "object",
+          "properties": {
+            "hostname": {
+              "type": "keyword"
+            },
+            "port": {
+              "type": "integer"
+            },
+            "service": {
+              "type": "keyword"
+            },
+            "ip": {
+              "type": "ip"
+            }
+          }
+        },
+        "milter": {
+          "type": "object",
+          "properties": {
+            "result": {
+              "type": "keyword"
+            },
+            "data": {
+              "type": "text"
+            },
+            "message": {
+              "type": "text"
+            }
+          }
+        },
+        "message": {
+          "type": "text"
+        },
+        "orig_to": {
+          "type": "keyword"
+        },
+        "version": {
+          "type": "keyword"
+        },
+        "helo": {
+          "type": "keyword"
+        },
+        "proxy": {
+          "type": "object",
+          "properties": {
+            "result": {
+              "type": "keyword"
+            },
+            "smtp": {
+              "type": "object",
+              "properties": {
+                "stage": {
+                  "type": "keyword"
+                }
+              }
+            },
+            "message": {
+              "type": "text"
+            },
+            "status": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "short"
+                },
+                "code_enhanced": {
+                  "type": "keyword"
+                }
+              }
+            }
+          }
+        },
+        "scache": {
+          "type": "object",
+          "properties": {
+            "hits": {
+              "type": "integer"
+            },
+            "addresses": {
+              "type": "integer"
+            },
+            "domains": {
+              "type": "integer"
+            },
+            "connection": {
+              "type": "integer"
+            },
+            "miss": {
+              "type": "integer"
+            },
+            "timestamp": {
+              "type": "date"
+            }
+          }
+        },
+        "delay": {
+          "type": "object",
+          "properties": {
+            "in_qmgr": {
+              "type": "float"
+            },
+            "total": {
+              "type": "float"
+            },
+            "transmission": {
+              "type": "float"
+            },
+            "conn_setup": {
+              "type": "float"
+            },
+            "before_qmgr": {
+              "type": "float"
+            }
+          }
+        },
+        "service": {
+          "type": "keyword"
+        },
+        "message_level": {
+          "type": "keyword"
+        },
+        "tls": {
+          "type": "object",
+          "properties": {
+            "cipher": {
+              "type": "text"
+            },
+            "cipher_size": {
+              "type": "text"
+            },
+            "error": {
+              "type": "text"
+            },
+            "version": {
+              "type": "keyword"
+            }
+          }
+        },
+        "cmd": {
+          "type": "object",
+          "properties": {
+            "rcpt": {
+              "type": "object",
+              "properties": {
+                "total": {
+                  "type": "integer"
+                },
+                "accepted": {
+                  "type": "integer"
+                }
+              }
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "total": {
+                  "type": "integer"
+                },
+                "accepted": {
+                  "type": "integer"
+                }
+              }
+            },
+            "mail": {
+              "type": "object",
+              "properties": {
+                "total": {
+                  "type": "integer"
+                },
+                "accepted": {
+                  "type": "integer"
+                }
+              }
+            },
+            "starttls": {
+              "type": "object",
+              "properties": {
+                "total": {
+                  "type": "integer"
+                },
+                "accepted": {
+                  "type": "integer"
+                }
+              }
+            },
+            "auth": {
+              "type": "object",
+              "properties": {
+                "total": {
+                  "type": "integer"
+                },
+                "accepted": {
+                  "type": "integer"
+                }
+              }
+            },
+            "rset": {
+              "type": "object",
+              "properties": {
+                "total": {
+                  "type": "integer"
+                },
+                "accepted": {
+                  "type": "integer"
+                }
+              }
+            },
+            "count": {
+              "type": "object",
+              "properties": {
+                "total": {
+                  "type": "integer"
+                },
+                "accepted": {
+                  "type": "integer"
+                }
+              }
+            },
+            "counter_data": {
+              "type": "text"
+            },
+            "ehlo": {
+              "type": "object",
+              "properties": {
+                "total": {
+                  "type": "integer"
+                },
+                "accepted": {
+                  "type": "integer"
+                }
+              }
+            },
+            "unknown": {
+              "type": "object",
+              "properties": {
+                "total": {
+                  "type": "integer"
+                },
+                "accepted": {
+                  "type": "integer"
+                }
+              }
+            },
+            "helo": {
+              "type": "object",
+              "properties": {
+                "total": {
+                  "type": "integer"
+                },
+                "accepted": {
+                  "type": "integer"
+                }
+              }
+            },
+            "total": {
+              "type": "integer"
+            },
+            "quit": {
+              "type": "object",
+              "properties": {
+                "total": {
+                  "type": "integer"
+                },
+                "accepted": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "status": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "short"
+            },
+            "data": {
+              "type": "text"
+            },
+            "code_enhanced": {
+              "type": "keyword"
+            },
+            "message": {
+              "type": "text"
+            },
+            "dsn": {
+              "type": "keyword"
+            }
+          }
+        }
+      }
+    }
+  }
+}
