@@ -63,6 +63,9 @@
             }
           }
         },
+        "subject": {
+          "type": "match_only_text"
+        },
         "dnsbl": {
           "type": "object",
           "properties": {
